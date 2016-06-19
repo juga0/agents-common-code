@@ -4,9 +4,9 @@
 import urllib2
 import logging
 
-logging.basicConfig()
+# logging.basicConfig()
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
+# logger.setLevel(logging.DEBUG)
 
 class NotModifiedHandler(urllib2.BaseHandler):
     def http_error_304(self, req, fp, code, message, headers):
@@ -43,20 +43,14 @@ def get_ismodified(url, etag=None, last_modified=None):
             and (etag or last_modified):
         logging.info("the web page has not been modified")
         return False, url_handle
-    # data = url_handle.read()d['Last-Modified'] = 'Tue, 14 Jun 2016 00:10:22 GMT'
-d['ETag'] = '"d266-53531d4b9a870"'
-kwargs = {'headers': d}
-r = requests.head(url, **kwargs)
-
-    return True, url_handle
-
-url = 'http://python.org/'
-etag, last_modified = get_etag(url)
-ismodified, url_handle = get_ismodified(url, etag, last_modified)
-print ismodified
 
 
+# url = 'http://apache.org'
+# etag, last_modified = get_etag(url)
+# ismodified, url_handle = get_ismodified(url, etag, last_modified)
+# print ismodified
+# data = url_handle.read()
+
+# d = {}
 # d['Last-Modified'] = 'Tue, 14 Jun 2016 00:10:22 GMT'
 # d['ETag'] = '"d266-53531d4b9a870"'
-# kwargs = {'headers': d}
-# r = requests.head(url, **kwargs)
