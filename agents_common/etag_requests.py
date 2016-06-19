@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 def get_etag(url):
     r = requests.head(url)
     headers = r.headers
-    logger.debug('response headers %s', headers)
+    # logger.debug('response headers %s', headers)
     etag = headers.get('ETag')
     logger.debug('header response etag: %s', etag)
     last_modified = headers.get("Last-Modified")
