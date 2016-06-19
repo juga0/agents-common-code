@@ -1,0 +1,7 @@
+GitPython==2.0.5
+html2text==2016.5.29
+ndg-httpsclient==0.4.1
+pyasn1==0.1.9
+pyOpenSSL==16.0.0
+PyYAML==3.11
+requests==2.10.0
