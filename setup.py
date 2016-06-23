@@ -41,7 +41,7 @@ setup(
     description='Function utils for OII agents',
     long_description=long_description,
     #url='https://github.com/openintegrity/agents-common-code',
-    url='https://lab.openintegrity.org/openintegrity-agents/agents-common-code'
+    url='https://lab.openintegrity.org/agents/agents-common-code',
     author='__author__',
     author_email='juga@riseup.net',
     license='GPLv3',
