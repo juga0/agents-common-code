@@ -5,3 +5,4 @@ pyasn1==0.1.9
 pyOpenSSL==16.0.0
 PyYAML==3.11
 requests==2.10.0
+lxml==3.6.0
