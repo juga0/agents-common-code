@@ -164,11 +164,17 @@ def generate_metadata(repo_path):
     return metadata
 
 
-def generate_hash(text):
+def generate_hash(text, encoding=None):
     import hashlib
-    sha = hashlib.sha256(text).hexdigest()
-    logger.debug(sha)
-    return sha
+    logger.debug('type text %s', type(text))
+    if isinstance(text, unicode) and encoding:
+        logger.debug('text is unicode')
+        text = text.encode(encoding)
+        logger.debug('type text %s', type(text))
+    sha = hashlib.sha256(text)
+    sha_hex = sha.hexdigest()
+    logger.debug(sha_hex)
+    return sha_hex
 
 
 def obtain_script_version():
