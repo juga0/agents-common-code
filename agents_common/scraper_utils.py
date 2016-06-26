@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import os.path
-from scrapy.utils.project import get_project_settings
 from datetime import datetime
 import html2text
 import logging
@@ -11,7 +10,6 @@ import lxml.etree
 
 
 utf8_parser = lxml.etree.XMLParser(encoding='utf-8')
-settings = get_project_settings()
 logger = logging.getLogger(__name__)
 
 
@@ -31,11 +29,11 @@ def append(file, string):
     file.close()
 
 
-def save_html(body, args):
+def save_html(body, path, args):
     logger.debug(args)
-    html_path = (settings.get('HTML_PATH') % args)[:255]
-    if not os.path.isdir(settings.get('HTML_PATH')):
-        os.makedirs(settings.get('HTML_PATH'))
+    html_path = (path % args)[:255]
+    if not os.path.isdir(path):
+        os.makedirs(path)
     with open(html_path,  'w') as f:
         f.write(body)
     logger.debug('saving html %s' % html_path)
