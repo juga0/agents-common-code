@@ -33,9 +33,10 @@ def get_ismodified(url, etag=None, last_modified=None):
     r = requests.get(url, headers=headers)
     if r.status_code == 304 and (etag or last_modified):
         logger.info("the web page has not been modified")
-        return False, ''
+        return False, r
         # data = url_handle.read()
-    return True, r.content, r.headers
+    logging.info('the web page has been modified')
+    return True, r
 
 
 # url = 'http://apache.org/'
