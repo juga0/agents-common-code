@@ -13,9 +13,18 @@ utf8_parser = lxml.etree.XMLParser(encoding='utf-8')
 logger = logging.getLogger(__name__)
 
 
+def timestamp():
+    return datetime.now().replace(microsecond=0).isoformat().replace(':','')\
+        .replace('-','')
+
+
 def now_timestamp():
     return datetime.utcnow().replace(microsecond=0).isoformat()\
         .replace(':', '-')
+
+
+def url2filenamedashes(text):
+    return text.replace(' ', '_').replace('://', '-').replace('/', '-')
 
 
 def url2filename(text):
@@ -37,14 +46,6 @@ def save_html(body, path, args):
     with open(html_path,  'w') as f:
         f.write(body)
     logger.debug('saving html %s' % html_path)
-
-
-def html2md(text):
-    h = html2text.HTML2Text()
-    h.mark_code = True
-    if isinstance(text, unicode):
-        return h.handle(text).encode("UTF-8")
-    # FIXME: convert to unicode in case it isn't?
 
 
 # needed?
