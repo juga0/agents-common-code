@@ -12,15 +12,25 @@ import lxml.etree
 utf8_parser = lxml.etree.XMLParser(encoding='utf-8')
 logger = logging.getLogger(__name__)
 
+def last_modified2timestampstr(last_modified):
+    """
+
+    """
+    dt = datetime.strptime(last_modified, '%a, %d %b %Y %H:%M:%S %Z')
+    from pytz import timezone
+    dt.replace(tzinfo=timezone(last_modified.split()[-1:][0]))
+    return dt.isoformat().replace(':', '').replace('-', '') + 'Z'
+
+
 
 def timestamp():
-    return datetime.now().replace(microsecond=0).isoformat().replace(':','')\
-        .replace('-','')
+    return datetime.now().replace(microsecond=0).isoformat().replace(':', '')\
+        .replace('-', '') + 'Z'
 
 
 def now_timestamp():
     return datetime.utcnow().replace(microsecond=0).isoformat()\
-        .replace(':', '-')
+        .replace(':', '-') + 'Z'
 
 
 def url2filenamedashes(text):

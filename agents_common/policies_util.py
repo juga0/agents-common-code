@@ -164,10 +164,10 @@ def generate_metadata(repo_path):
     return metadata
 
 
-def generate_hash(text, encoding=None):
+def generate_hash(text, encoding='utf-8'):
     import hashlib
     logger.debug('type text %s', type(text))
-    if isinstance(text, unicode) and encoding:
+    if isinstance(text, unicode):
         logger.debug('text is unicode')
         text = text.encode(encoding)
         logger.debug('type text %s', type(text))
