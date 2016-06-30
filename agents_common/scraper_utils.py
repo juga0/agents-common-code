@@ -27,7 +27,6 @@ def last_modified2timestamp_str(last_modified):
     return dt.isoformat().replace(':', '').replace('-', '') + 'Z'
 
 
-
 def now_timestamp_str_nodashes():
     """
     Return the current date time in ISO 8601 (yyyy-MM-ddTHH:mm:ssZ)
