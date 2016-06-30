@@ -8,13 +8,18 @@ import logging
 import lxml.html
 import lxml.etree
 
-
 utf8_parser = lxml.etree.XMLParser(encoding='utf-8')
 logger = logging.getLogger(__name__)
 
-def last_modified2timestampstr(last_modified):
-    """
 
+def last_modified2timestamp_str(last_modified):
+    """
+    Returns the current last_modified header of a Web page
+    (Mon, 13 Jun 2016 19:01:36 GMT) in ISO 8601 (yyyy-MM-ddTHH:mm:ssZ) date
+    time without dashes (yyyyMMddTHHmmssZ).
+    >>> last_modified = 'Mon, 13 Jun 2016 19:01:36 GMT'
+    >>> last_modified2timestamp_str(last_modified)
+    '20160613T190136Z'
     """
     dt = datetime.strptime(last_modified, '%a, %d %b %Y %H:%M:%S %Z')
     from pytz import timezone
@@ -23,7 +28,14 @@ def last_modified2timestampstr(last_modified):
 
 
 
-def timestamp():
+def now_timestamp_str_nodashes():
+    """
+    Return the current date time in ISO 8601 (yyyy-MM-ddTHH:mm:ssZ)
+    without dashes ((yyyyMMddTHHmmssZ)).
+    >> import datetime
+    >> datetime.utcnow().replace(microsecond=0).isoformat().replace(':', '')\
+         .replace('-', '') + 'Z'
+    """
     return datetime.now().replace(microsecond=0).isoformat().replace(':', '')\
         .replace('-', '') + 'Z'
 
@@ -33,8 +45,16 @@ def now_timestamp():
         .replace(':', '-') + 'Z'
 
 
-def url2filenamedashes(text):
-    return text.replace(' ', '_').replace('://', '-').replace('/', '-')
+def url2filenamedashes(url):
+    """
+    Convert a url (https://staging-store.openintegrity.org/url) into a POSIX
+    file name ()
+
+    >>> url = 'https://staging-store.openintegrity.org/url'
+    >>> url.replace(' ', '_').replace('://', '-').replace('/', '-')
+    'https-staging-store.openintegrity.org-url'
+    """
+    return url.replace(' ', '_').replace('://', '-').replace('/', '-')
 
 
 def url2filename(text):
@@ -64,3 +84,8 @@ def parse_from_unicode(unicode_str):
     if isinstance(unicode_str, unicode):
         s = unicode_str.encode('utf-8')
         return lxml.etree.fromstring(s, parser=utf8_parser)
+
+
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod()

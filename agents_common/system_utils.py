@@ -60,6 +60,7 @@ def obtain_ip():
 
 
 def obtain_public_ip():
+    """Return the public IP where the program is running."""
     from urllib2 import urlopen
     my_ip = urlopen('http://ip.42.pl/raw').read()
     logger.debug('public ip %s' % my_ip)
