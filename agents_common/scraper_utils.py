@@ -2,9 +2,7 @@
 
 import os.path
 from datetime import datetime
-import html2text
 import logging
-# needed?
 import lxml.html
 import lxml.etree
 
@@ -44,6 +42,15 @@ def now_timestamp():
         .replace(':', '-') + 'Z'
 
 
+def rm_disallowd_chars(filename):
+    import string
+    import unicodedata
+    valid_chars = "-_.() %s%s" % (string.ascii_letters, string.digits)
+    valid_filename = unicodedata.normalize('NFKD', filename)\
+        .encode('ASCII', 'ignore')
+    return ''.join(c for c in valid_filename if c in valid_chars)
+
+
 def url2filenamedashes(url):
     """
     Convert a url (https://staging-store.openintegrity.org/url) into a POSIX
@@ -53,7 +60,8 @@ def url2filenamedashes(url):
     >>> url.replace(' ', '_').replace('://', '-').replace('/', '-')
     'https-staging-store.openintegrity.org-url'
     """
-    return url.replace(' ', '_').replace('://', '-').replace('/', '-')
+    # return url.replace(' ', '_').replace('://', '-').replace('/', '-')
+    return rm_disallowd_chars(unicode(url))
 
 
 def url2filename(text):
