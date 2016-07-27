@@ -166,11 +166,10 @@ def generate_metadata(repo_path):
 
 def generate_hash(text, encoding='utf-8'):
     import hashlib
+    logger.debug('calculating hash')
     logger.debug('type text %s', type(text))
     if isinstance(text, unicode):
-        logger.debug('text is unicode')
         text = text.encode(encoding)
-        logger.debug('type text %s', type(text))
     sha = hashlib.sha256(text)
     sha_hex = sha.hexdigest()
     logger.debug(sha_hex)
