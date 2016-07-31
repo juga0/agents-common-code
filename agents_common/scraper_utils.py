@@ -18,6 +18,8 @@ def last_modified2timestamp_str(last_modified):
     >>> last_modified = 'Mon, 13 Jun 2016 19:01:36 GMT'
     >>> last_modified2timestamp_str(last_modified)
     '20160613T190136Z'
+    Also:
+    iso8601.parse_date(datetime.datetime.now(tz=pytz.utc).isoformat())
     """
     dt = datetime.strptime(last_modified, '%a, %d %b %Y %H:%M:%S %Z')
     from pytz import timezone
@@ -36,6 +38,18 @@ def now_timestamp_str_nodashes():
     return datetime.now().replace(microsecond=0).isoformat().replace(':', '')\
         .replace('-', '') + 'Z'
 
+
+def now_timestamp_ISO_8601():
+    """
+    # assuming that utcnow returns the correct local time converted to UTC:
+    >> datetime.utcnow().isoformat()
+    '2016-07-30T13:36:06.305653'
+    # for python timezone aware objects:
+    >> datetime.now(tz=pytz.utc).isoformat()
+    '2016-07-30T13:37:23.748609+00:00'
+    Both 'Z' and '+00:00' are compatible with iso format
+    """
+    return datetime.utcnow().isoformat() + 'Z'
 
 def now_timestamp():
     return datetime.utcnow().replace(microsecond=0).isoformat()\

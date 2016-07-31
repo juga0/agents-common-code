@@ -19,6 +19,7 @@ def get_etag(url):
     logger.debug('header response last-modifed: %s', last_modified)
     if not etag and not last_modified:
         logger.debug('url %s does not return etag nor last_modified', url)
+        return '', ''
     return etag, last_modified
 
 def get_ismodified(url, etag=None, last_modified=None):

@@ -14,7 +14,7 @@ def read_yaml(file_path, exit_on_error=False):
         logger.debug('yaml data: ')
         logger.debug(yaml_data)
         return yaml_data
-    except IOError, e:
+    except IOError as e:
         logger.exception(e)
         logger.debug('cant obtain yaml file')
         if exit_on_error:
